@@ -52,14 +52,20 @@ $string = "srf  3 hg bdr b666^&$777 tdr  g  brt W3EW BY 6666   @#$ %^%&kb^% b666
 $arr3 = array_filter(explode(' ', $string));
 $max_len = mb_strlen($arr[0]);
 $min_len = mb_strlen($arr[0]);
-foreach ($arr3 as $key => $value) {
-    if ($max_len < mb_strlen($value)) $max_len = mb_strlen($value);
-    if ($min_len > mb_strlen($value)) $min_len = mb_strlen($value);
+$max_el = $arr[0];
+$min_el = $arr[0];
+foreach ($arr3 as $value) {
+    if ($max_len < mb_strlen($value)) {
+        $max_len = mb_strlen($value);
+        $max_el = $value;
+    }
+    if ($min_len > mb_strlen($value)) {
+        $min_len = mb_strlen($value);
+        $max_el = $value;
+    }
 }
-foreach ($arr3 as $key => $value){
-    if (mb_strlen($value) == $max_len)echo 'MAX: '.$arr3[$key].PHP_EOL;
-    if (mb_strlen($value) == $min_len)echo 'MIN: '.$arr3[$key].PHP_EOL;
-}
+echo "Максимальное слово: $max_el, его длина $max_len \r\n 
+Минимальное слово: $min_el, его длина $min_len";
 
 
 
@@ -114,10 +120,13 @@ foreach ($arr7 as $key => $value){
 // Дана строка. В строке заменить все двоеточия : точкой с запятой ;.
 // Подсчитать количество замен.
 echo '<h3>Task#8 </h3>';
-$string8= ":srf  3 h:gh &bdr;t:dr1  :  b:rtb1 W3EW BY 16666   @#$ %^%&kb^% b666^&$^&% hfh srs uy ";
-$result = implode(explode(':',$string8),';');
+$string8= ":srf  3 h:gh &bdr;t:dr1  :  b:rtb1 W3E:W BY 16666   @#$ %^%&kb^% b666^&$^&% hfh srs uy ";
+$string8 = str_split ($string8);
+$count = 0;
+$string8 =  implode(str_replace(':', ';', $string8, $count));
 
-echo $result.PHP_EOL;
+echo " Выполнено $count замен ";
+
 
 
 
@@ -173,10 +182,13 @@ foreach ($arr11 as $value){
 // Дана строка, в которой слова зашифрованы — каждое из них записано наоборот.
 // Расшифровать строку и вывести на экран.
 echo '<h3>Task#12 </h3>';
-$string12 = "ali$^67qua m///agna dolore et labore ut incididunt tempo8r ei$2usmod do sed elit, adipiscing consectetur amet, sit dolor ipsum Lorem";
-$arr12 = array_filter(explode(' ',preg_replace('/[^A-Za-z\s]/','', $string12)));
-krsort($arr12);
-print_r($string12= implode($arr12, ' '));
+$string12 = 'steL vertts ruo txet';
+$arr12 = array_filter(explode(' ', $string12));
+foreach ($arr12 as &$value){
+    $value = strrev($value);
+}
+$string12= implode($arr12, ' ');
+print_r($string12);
 
 
 
